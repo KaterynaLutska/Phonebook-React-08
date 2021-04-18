@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import { connect } from 'react-redux';
 import { contactsOperations } from '../../redux/phonebook';
@@ -46,6 +46,7 @@ class ContactForm extends Component {
 
   render() {
     const { name, number, message } = this.state;
+
     return (
       <div className="phonebook">
         <form onSubmit={this.handleSubmit} className="phonebook-form">
@@ -55,7 +56,7 @@ class ContactForm extends Component {
                 className="phonebook-input"
                 type="text"
                 name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                //pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 value={name}
                 title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                 placeholder="name"
@@ -69,7 +70,7 @@ class ContactForm extends Component {
                 type="tel"
                 name="number"
                 value={number}
-                pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+                //pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
                 placeholder="number"
                 title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
                 onChange={this.handleChange}

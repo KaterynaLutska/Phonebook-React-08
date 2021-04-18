@@ -1,19 +1,59 @@
 import './App.css';
-import { Component } from 'react';
+import { Component, Suspense, lazy } from 'react';
+import { Switch } from 'react-router-dom';
+import { authOperations } from './redux/auth';
+import { connect } from 'react-redux';
 
 import Container from './components/Container/Container';
-import Phonebook from './components/Phonebook';
+import PrivateRoute from './components/PrivateRoute/PrivaeRoute';
+import PublicRoute from './components/PublicRoute/PublicRoute';
+import AppBar from './components/AppBar';
+
+const HomeView = lazy(() => import('./views/HomeView'));
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
+const PhonebookView = lazy(() => import('./views/PhonebookView'));
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
   render() {
     return (
       <div className="App">
         <Container>
-          <Phonebook />
+          <AppBar />
+          {/* <Modal /> */}
+          <Suspense fallback={<p>Loading...</p>}>
+            <Switch>
+              <PublicRoute exact path="/" component={HomeView} />
+              <PublicRoute
+                path="/login"
+                restricted
+                redirectTo={'/'}
+                component={LoginView}
+              />
+              <PublicRoute
+                path="/register"
+                restricted
+                redirectTo={'/'}
+                component={RegisterView}
+              />
+              <PrivateRoute
+                path="/contacts"
+                redirectTo={'/login'}
+                component={PhonebookView}
+              />
+            </Switch>
+          </Suspense>
         </Container>
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);
