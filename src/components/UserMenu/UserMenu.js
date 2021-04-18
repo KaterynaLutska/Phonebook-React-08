@@ -1,23 +1,23 @@
-import defaultAvatar from '../../images/online2.png';
+import defaultAvatar from '../../images/ket.png';
 import { connect } from 'react-redux';
-import s from './UserMenu.module.css';
-import { authOperations, authSelectors } from '../../redux/auth';
+import { authOperations } from '../../redux/auth';
+import { Avatar, CssBaseline, Button } from '@material-ui/core';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-const UserMenu = ({ avatar, name, onLogout }) => {
+const UserMenu = ({ avatar, onLogout }) => {
   return (
-    <div className={s.UserMenu}>
-      <p>Welcome, {name} </p>
-
-      <img src={avatar} alt="userFoto" width="120" />
-      <button type="button" onClick={onLogout}>
-        Log out
-      </button>
-    </div>
+    <>
+      <CssBaseline />
+      <Avatar alt="user" src={avatar} />
+      <Button type="button" onClick={onLogout}>
+        <LockOpenIcon fontSize="large" style={{ color: 'white' }} />
+      </Button>
+    </>
   );
 };
-const mapStateToProps = state => ({
+
+const mapStateToProps = () => ({
   avatar: defaultAvatar,
-  name: authSelectors.getUserName(state),
 });
 
 const mapDispatchToProps = {

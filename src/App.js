@@ -7,12 +7,14 @@ import { connect } from 'react-redux';
 import Container from './components/Container/Container';
 import PrivateRoute from './components/PrivateRoute/PrivaeRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
-import AppBar from './components/AppBar';
+import MenuBar from './components/MenuBar';
+import Footer from './components/Footer';
 
 const HomeView = lazy(() => import('./views/HomeView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
 const PhonebookView = lazy(() => import('./views/PhonebookView'));
+const TodoView = lazy(() => import('./views/TodoView'));
 
 class App extends Component {
   componentDidMount() {
@@ -21,9 +23,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <MenuBar />
         <Container>
-          <AppBar />
-          {/* <Modal /> */}
           <Suspense fallback={<p>Loading...</p>}>
             <Switch>
               <PublicRoute exact path="/" component={HomeView} />
@@ -44,9 +45,15 @@ class App extends Component {
                 redirectTo={'/login'}
                 component={PhonebookView}
               />
+              <PrivateRoute
+                path="/todos"
+                redirectTo={'/login'}
+                component={TodoView}
+              />
             </Switch>
           </Suspense>
         </Container>
+        <Footer />
       </div>
     );
   }

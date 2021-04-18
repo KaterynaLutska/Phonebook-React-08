@@ -1,11 +1,11 @@
 import ContactForm from '../components/ContactForm';
 import Filter from '../components/Filter';
 import ContactList from '../components/ContactList';
+
 import { connect } from 'react-redux';
 import { contactsOperations } from '../redux/phonebook';
 import { Component } from 'react';
 import { contactsSelectors } from '../redux/phonebook';
-import { authSelectors } from '../redux/auth';
 
 class PhonebookView extends Component {
   componentDidMount() {
@@ -19,7 +19,6 @@ class PhonebookView extends Component {
         <ContactForm />
         {items.length > 0 && (
           <>
-            <h2>Contacts</h2>
             <Filter />
             <ContactList />
           </>
@@ -30,7 +29,6 @@ class PhonebookView extends Component {
 }
 const mapStateToProps = state => ({
   items: contactsSelectors.contactsArray(state),
-  //isAuthenticated: authSelectors.getIsAuthenticated(state),
 });
 
 const mapDispatchToProps = {

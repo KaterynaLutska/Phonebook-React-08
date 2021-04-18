@@ -1,3 +1,8 @@
 .AuthItem {
   margin-right: 10px;
 }
+
+.AuthNav {
+  display: flex;
+  list-style: none;
+}

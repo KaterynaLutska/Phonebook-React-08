@@ -1,12 +1,22 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations } from '../redux/auth';
+import img from '../images/online2.png';
+
+import {
+  CssBaseline,
+  Button,
+  TextField,
+  Container,
+  Typography,
+} from '@material-ui/core';
 
 class LoginView extends Component {
   state = {
     email: '',
     password: '',
   };
+
   handleChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({
@@ -23,11 +33,26 @@ class LoginView extends Component {
 
   render() {
     const { email, password } = this.state;
+
     return (
-      <div>
-        <h2>Plese, sign in</h2>
-        <form onSubmit={this.handleSubmit}>
-          <input
+      <Container maxWidth="sm">
+        <CssBaseline />
+        <Typography
+          variant="h3"
+          align="center"
+          color="textPrimary"
+          style={{ margin: '30px' }}
+        >
+          Please, sign in!
+        </Typography>
+
+        <form
+          onSubmit={this.handleSubmit}
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <TextField
+            id="standard-basic"
+            label="e-mail"
             className="phonebook-input"
             type="tel"
             name="email"
@@ -35,31 +60,42 @@ class LoginView extends Component {
             placeholder="e-mail"
             required
             onChange={this.handleChange}
+            style={{ marginRight: '20px' }}
           />
-
-          <input
+          <TextField
+            id="standard-basic"
+            label="password"
             className="phonebook-input"
             type="tel"
             name="password"
             value={password}
             placeholder="password"
-            //password
+            type="password"
             title="Please, more than seven values"
             required
             onChange={this.handleChange}
           />
-          <button type="submit">Submit</button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            style={{ display: 'flex', marginTop: '10px' }}
+          >
+            Submit
+          </Button>
         </form>
-      </div>
+        <img alt="img" src={this.props.img} width="380px"></img>
+      </Container>
     );
   }
 }
-// const mapStateToProps = (state) => ({
 
-// })
+const mapStateToProps = () => ({
+  img: img,
+});
 
 const mapDispatchToProps = {
   onLogIn: authOperations.logIn,
 };
 
-export default connect(null, mapDispatchToProps)(LoginView);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

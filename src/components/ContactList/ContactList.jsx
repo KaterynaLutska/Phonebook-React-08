@@ -1,38 +1,71 @@
 import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CssBaseline,
+  Button,
+  Grid,
+  Container,
+  Typography,
+  CardActions,
+} from '@material-ui/core';
+import useStyles from '../../styles';
+import img from '../../images/face.png';
+import { connect } from 'react-redux';
 
-// function App() {
-//   return <Button color="primary">Hello World</Button>;
-// }
-
-const ContactList = ({ contacts, onDelete }) => {
+const ContactList = ({ contacts, onDelete, avatar }) => {
+  const classes = useStyles();
   return (
     <>
-      <ul className="contact-list">
-        {contacts.map(el => (
-          <li key={el.id} className="contact-item">
-            {el.name + ':'}
-            <span className="contact-span">{el.number}</span>
-            <p className="contact-message">{el.message}</p>
-            <Button
-              onClick={() => onDelete(el.id)}
-              //color="primary"
-              variant="contained"
-              className="btn"
-            >
-              Delete
-            </Button>
-            {/* <button onClick={() => onDelete(el.id)} className="btn">
-              Delete
-            </button> */}
-          </li>
-        ))}
-      </ul>
+      <CssBaseline />
+      <Container maxWidth="md" className={classes.cardCrid}>
+        <Grid container spacing={4}>
+          {contacts.map(el => (
+            <Grid key={el.id} item xs={12} sm={6}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={avatar}
+                  title="imgTitle"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography variant="h5"> {el.name + ':'} </Typography>
+                  <Typography variant="h5">{el.number}</Typography>
+                  <Typography variant="h4">{el.message}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    onClick={() => onDelete(el.id)}
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    onClick={() => alert('Coming soon')}
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Edit
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </>
   );
 };
 
-export default ContactList;
+const mapStateToProps = () => ({
+  avatar: img,
+});
+
+export default connect(mapStateToProps)(ContactList);
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape),

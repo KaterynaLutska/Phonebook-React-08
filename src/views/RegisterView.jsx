@@ -2,6 +2,14 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
+import {
+  CssBaseline,
+  Button,
+  TextField,
+  Container,
+  Typography,
+} from '@material-ui/core';
+
 class RegisterView extends Component {
   state = {
     name: '',
@@ -28,43 +36,61 @@ class RegisterView extends Component {
   render() {
     const { name, email, password } = this.state;
     return (
-      <div>
-        <h1>Please, add Profile</h1>
+      <Container maxWidth="sm">
+        <CssBaseline />
+        <Typography
+          variant="h4"
+          align="center"
+          color="textPrimary"
+          style={{ marginTop: '60px', marginBottom: '30px' }}
+        >
+          Please, add your Profile!
+        </Typography>
         <form onSubmit={this.handleSubmit}>
-          <input
-            className="phonebook-input"
+          <TextField
             type="text"
-            placeholder="name"
             name="name"
             value={name}
             required
             onChange={this.handleChange}
+            id="standard-basic"
+            label="name"
+            style={{ marginRight: '20px' }}
           />
 
-          <input
-            className="phonebook-input"
+          <TextField
             type="tel"
             name="email"
             value={email}
-            placeholder="e-mail"
             required
             onChange={this.handleChange}
+            id="standard-basic"
+            label="e-mail"
+            style={{ marginRight: '20px' }}
           />
 
-          <input
-            className="phonebook-input"
+          <TextField
             type="tel"
             name="password"
             value={password}
-            placeholder="password"
-            //password
+            type="password"
             title="Please, more than seven values"
             required
             onChange={this.handleChange}
+            id="standard-basic"
+            label="password"
           />
-          <button type="submit">Submit</button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className="btnRegister"
+            style={{ marginTop: '40px' }}
+          >
+            Submit
+          </Button>
         </form>
-      </div>
+      </Container>
     );
   }
 }
