@@ -4,12 +4,15 @@ import {
   fetchContactsRequest,
   fetchContactsSuccess,
   fetchContactsError,
-  addContactsRequest,
-  addContactsSuccess,
-  addContactsError,
-  deleteContactsRequest,
-  deleteContactsSuccess,
-  deleteContactsError,
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+  changeContactRequest,
+  changeContactSuccess,
+  changeContactError,
 } from './phonebook-actions';
 
 const fetchContacts = () => async dispatch => {
@@ -25,25 +28,35 @@ const fetchContacts = () => async dispatch => {
 };
 
 const addContact = contact => async dispatch => {
-  dispatch(addContactsRequest());
+  dispatch(addContactRequest());
 
   try {
     const response = await axios.post('/contacts', contact);
-    dispatch(addContactsSuccess(response.data));
+    dispatch(addContactSuccess(response.data));
   } catch (error) {
-    dispatch(addContactsError(error.message));
+    dispatch(addContactError(error.message));
   }
 };
 
 const deleteContacts = id => async dispatch => {
-  dispatch(deleteContactsRequest());
+  dispatch(deleteContactRequest());
 
   try {
     const response = await axios.delete(`/contacts/${id}`);
-    dispatch(deleteContactsSuccess(id));
+    dispatch(deleteContactSuccess(id));
   } catch (error) {
-    dispatch(deleteContactsError(error.message));
+    dispatch(deleteContactError(error.message));
   }
 };
 
-export default { fetchContacts, addContact, deleteContacts };
+const changeContact = id => async dispatch => {
+  dispatch(changeContactRequest());
+  try {
+    const response = await axios.patch(`/contacts/${id}`);
+    dispatch(changeContactSuccess(id));
+  } catch (error) {
+    dispatch(changeContactError(error.message));
+  }
+};
+
+export default { fetchContacts, addContact, deleteContacts, changeContact };

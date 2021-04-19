@@ -1,4 +1,4 @@
-import s from './MenuBarWrapper.module.css';
+import s from './MenuBar.module.css';
 import { connect } from 'react-redux';
 import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -10,9 +11,10 @@ import {
   Typography,
   CardActions,
 } from '@material-ui/core';
+
 import useStyles from '../../styles';
-import img from '../../images/face.png';
-import { connect } from 'react-redux';
+
+import TransitionsModal from '../Modal/Modal';
 
 const ContactList = ({ contacts, onDelete, avatar }) => {
   const classes = useStyles();
@@ -43,14 +45,15 @@ const ContactList = ({ contacts, onDelete, avatar }) => {
                   >
                     Delete
                   </Button>
-                  <Button
-                    onClick={() => alert('Coming soon')}
+                  {/* <Button
+                    // onClick={handleOpen}
                     size="small"
                     color="primary"
                     variant="contained"
                   >
                     Edit
-                  </Button>
+                  </Button> */}
+                  <TransitionsModal id={el.id} />
                 </CardActions>
               </Card>
             </Grid>
@@ -61,11 +64,7 @@ const ContactList = ({ contacts, onDelete, avatar }) => {
   );
 };
 
-const mapStateToProps = () => ({
-  avatar: img,
-});
-
-export default connect(mapStateToProps)(ContactList);
+export default ContactList;
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape),

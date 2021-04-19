@@ -16,7 +16,7 @@ const HomeView = ({ avatar, isAuthenticated, name, cat }) => {
             color="textPrimary"
             style={{ marginTop: '60px' }}
           >
-            It is your best Organizer ever
+            It is your best Phonebook ever!
           </Typography>
           <Typography
             variant="h4"
@@ -32,8 +32,8 @@ const HomeView = ({ avatar, isAuthenticated, name, cat }) => {
             color="textSecondary"
             paragraph
           >
-            My name is Katya and this is my first application! Here you can
-            find a lot of useful things!
+            My name is Kate and this is my first application! Here you can find
+            a lot of useful things!
           </Typography>
           <Typography
             variant="h5"

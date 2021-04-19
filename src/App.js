@@ -14,7 +14,6 @@ const HomeView = lazy(() => import('./views/HomeView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
 const PhonebookView = lazy(() => import('./views/PhonebookView'));
-const TodoView = lazy(() => import('./views/TodoView'));
 
 class App extends Component {
   componentDidMount() {
@@ -44,11 +43,6 @@ class App extends Component {
                 path="/contacts"
                 redirectTo={'/login'}
                 component={PhonebookView}
-              />
-              <PrivateRoute
-                path="/todos"
-                redirectTo={'/login'}
-                component={TodoView}
               />
             </Switch>
           </Suspense>

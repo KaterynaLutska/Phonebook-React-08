@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { contactsOperations } from '../../redux/phonebook';
 import { contactsSelectors } from '../../redux/phonebook';
 import s from './ContactForm.module.css';
-import PropTypes from 'prop-types';
 
 import { Container, Button, Input, InputAdornment } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -13,7 +14,6 @@ class ContactForm extends Component {
   state = {
     name: '',
     number: '',
-    message: '',
   };
 
   handleChange = e => {
@@ -27,7 +27,7 @@ class ContactForm extends Component {
     e.preventDefault();
 
     const { contacts } = this.props;
-    const { name, number, message } = this.state;
+    const { name, number } = this.state;
     let newContact;
     this.reset();
     if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
@@ -38,14 +38,13 @@ class ContactForm extends Component {
       newContact = {
         name: name,
         number: number,
-        message: message,
       };
     }
     return this.props.onSubmit(newContact);
   };
 
   reset = () => {
-    this.setState({ name: '', number: '', message: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -65,7 +64,7 @@ class ContactForm extends Component {
                 }
                 type="text"
                 name="name"
-                //pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 value={name}
                 title="The name can only consist of letters, apostrophes, dashes and spaces. For example: Jacob Mercer..."
                 placeholder="name"
@@ -84,14 +83,13 @@ class ContactForm extends Component {
                 type="tel"
                 name="number"
                 value={number}
-                //pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+                pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
                 placeholder="number"
                 title="The phone number must be 11-12 digits long and can contain numbers, spaces, dashes, pot-bellied brackets and can start with +"
                 onChange={this.handleChange}
                 required
               />
             </label>
-
             <Button color="primary" variant="contained" type="submit">
               Add contact
             </Button>
@@ -115,6 +113,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 ContactForm.propTypes = {
   name: PropTypes.string,
   number: PropTypes.number,
-  message: PropTypes.string,
   onSubmit: PropTypes.func,
 };

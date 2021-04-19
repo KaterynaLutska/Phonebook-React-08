@@ -14,18 +14,11 @@ const Navigation = ({ isAuthenticated }) => {
         <Home fontSize="large" style={{ color: 'white' }} />
       </NavLink>
       {isAuthenticated && (
-        <>
-          <Typography variant="h6">
-            <NavLink className={s.NavigationItem} exact to="/contacts">
-              Phonebook
-            </NavLink>
-          </Typography>
-          <Typography variant="h6">
-            <NavLink className={s.NavigationItem} exact to="/todos">
-              Todos
-            </NavLink>
-          </Typography>
-        </>
+        <Typography variant="h6">
+          <NavLink className={s.NavigationItem} exact to="/contacts">
+            Phonebook
+          </NavLink>
+        </Typography>
       )}
     </div>
   );
