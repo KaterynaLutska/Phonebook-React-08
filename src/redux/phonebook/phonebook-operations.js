@@ -10,9 +10,9 @@ import {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
-  changeContactRequest,
-  changeContactSuccess,
-  changeContactError,
+  editContactRequest,
+  editContactSuccess,
+  editContactError,
 } from './phonebook-actions';
 
 const fetchContacts = () => async dispatch => {
@@ -49,13 +49,13 @@ const deleteContacts = id => async dispatch => {
   }
 };
 
-const changeContact = id => async dispatch => {
-  dispatch(changeContactRequest());
+const changeContact = ({ name, number, id }) => async dispatch => {
+  dispatch(editContactRequest());
   try {
-    const response = await axios.patch(`/contacts/${id}`);
-    dispatch(changeContactSuccess(id));
+    const response = await axios.patch(`/contacts/${id}`, { name, number });
+    dispatch(editContactSuccess(response.data));
   } catch (error) {
-    dispatch(changeContactError(error.message));
+    dispatch(editContactError(error.message));
   }
 };
 

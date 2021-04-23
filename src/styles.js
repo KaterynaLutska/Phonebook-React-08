@@ -27,6 +27,17 @@ const useStyles = makeStyles(theme => ({
     //backgroundColor: theme.palette.background.paper,
     padding: '40px 0',
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 export default useStyles;

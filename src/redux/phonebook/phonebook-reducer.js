@@ -12,9 +12,11 @@ import {
   deleteContactSuccess,
   deleteContactError,
   changeFilter,
-  changeContactRequest,
-  changeContactSuccess,
-  changeContactError,
+  editContactRequest,
+  editContactSuccess,
+  editContactError,
+  openModal,
+  closeModal,
 } from './phonebook-actions';
 
 const items = createReducer([], {
@@ -22,12 +24,18 @@ const items = createReducer([], {
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) =>
     state.filter(el => el.id !== payload),
-  [changeContactSuccess]: (state, { payload }) =>
+  [editContactSuccess]: (state, { payload }) =>
     state.map(el => (el.id !== payload.id ? el : payload)),
 });
 
 const filter = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
+});
+
+const modal = createReducer(false, {
+  [openModal]: () => true,
+  [closeModal]: () => false,
+  [editContactSuccess]: () => false,
 });
 
 const loading = createReducer(false, {
@@ -40,9 +48,9 @@ const loading = createReducer(false, {
   [deleteContactRequest]: () => true,
   [deleteContactSuccess]: () => false,
   [deleteContactError]: () => false,
-  [changeContactRequest]: () => true,
-  [changeContactError]: () => false,
-  [changeContactSuccess]: () => false,
+  [editContactRequest]: () => true,
+  [editContactError]: () => false,
+  [editContactSuccess]: () => false,
 });
 
 const error = createReducer(null, {});
@@ -52,4 +60,5 @@ export default combineReducers({
   loading,
   filter,
   error,
+  modal,
 });

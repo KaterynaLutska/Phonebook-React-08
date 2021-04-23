@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import img from '../images/ket.png';
 import { authSelectors } from '../redux/auth';
 import { CssBaseline, Typography, Container } from '@material-ui/core';
-import cat from '../images/cat.png';
 
-const HomeView = ({ avatar, isAuthenticated, name, cat }) => {
+const HomeView = ({ isAuthenticated, name }) => {
   return (
     <Container maxWidth="sm">
       <CssBaseline />
@@ -71,7 +70,6 @@ const mapStateToProps = state => ({
   avatar: img,
   isAuthenticated: authSelectors.getIsAuthenticated(state),
   name: authSelectors.getUserName(state),
-  cat: cat,
 });
 
 export default connect(mapStateToProps)(HomeView);

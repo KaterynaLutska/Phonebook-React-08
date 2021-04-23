@@ -20,12 +20,13 @@ export const deleteContactSuccess = createAction(
 );
 export const deleteContactError = createAction('contacts/deleteContactError');
 
-export const changeContactRequest = createAction(
-  'contacts/changeContactSuccess',
-);
-export const changeContactSuccess = createAction(
-  'contacts/changeContactRequest',
-);
-export const changeContactError = createAction('contacts/changeContactError');
+export const changeContact = createAction('contacts/changeContact');
 
-export const changeFilter = createAction('phonebook/FILTER');
+export const editContactRequest = createAction('contacts/editContactRequest');
+export const editContactSuccess = createAction('contacts/editContactSuccess');
+export const editContactError = createAction('contacts/editContactError');
+
+export const changeFilter = createAction('contacts/FILTER');
+
+export const openModal = createAction('contacts/openModal');
+export const closeModal = createAction('contacts/closeModal');

@@ -2,10 +2,10 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations } from '../redux/auth';
 import img from '../images/online2.png';
+import MyButton from '../components/Button';
 
 import {
   CssBaseline,
-  Button,
   TextField,
   Container,
   Typography,
@@ -75,14 +75,10 @@ class LoginView extends Component {
             required
             onChange={this.handleChange}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
+          <MyButton
+            title={'Submit'}
             style={{ display: 'flex', marginTop: '10px' }}
-          >
-            Submit
-          </Button>
+          />
         </form>
         <img alt="img" src={this.props.img} width="380px"></img>
       </Container>

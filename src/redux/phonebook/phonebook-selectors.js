@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const contactsArray = state => state.contacts.items;
 const getFilter = state => state.contacts.filter;
+const getModalBoolean = state => state.contacts.modal;
 
 // мемоізація //
 const getVisibleContacts = createSelector(
@@ -16,4 +17,5 @@ export default {
   contactsArray,
   getFilter,
   getVisibleContacts,
+  getModalBoolean,
 };

@@ -5,7 +5,6 @@ import {
   CardMedia,
   CardContent,
   CssBaseline,
-  Button,
   Grid,
   Container,
   Typography,
@@ -13,11 +12,17 @@ import {
 } from '@material-ui/core';
 
 import useStyles from '../../styles';
+import MyButton from '../Button';
 
-import TransitionsModal from '../Modal/Modal';
-
-const ContactList = ({ contacts, onDelete, avatar }) => {
+const ContactList = ({
+  contacts,
+  onDelete,
+  avatar,
+  openModal,
+  editContact,
+}) => {
   const classes = useStyles();
+
   return (
     <>
       <CssBaseline />
@@ -37,23 +42,15 @@ const ContactList = ({ contacts, onDelete, avatar }) => {
                   <Typography variant="h4">{el.message}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button
-                    onClick={() => onDelete(el.id)}
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                  >
-                    Delete
-                  </Button>
-                  {/* <Button
-                    // onClick={handleOpen}
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                  >
-                    Edit
-                  </Button> */}
-                  <TransitionsModal id={el.id} />
+                  <MyButton title={'Delete'} onClick={() => onDelete(el.id)} />
+
+                  <MyButton
+                    title={'Edit'}
+                    onClick={() => {
+                      editContact(el);
+                      openModal();
+                    }}
+                  />
                 </CardActions>
               </Card>
             </Grid>

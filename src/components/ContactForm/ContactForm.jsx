@@ -1,12 +1,16 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import s from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { contactsOperations } from '../../redux/phonebook';
-import { contactsSelectors } from '../../redux/phonebook';
-import s from './ContactForm.module.css';
+import {
+  closeModal,
+  contactsOperations,
+  contactsSelectors,
+} from '../../redux/phonebook';
+import MyButton from '../Button';
 
-import { Container, Button, Input, InputAdornment } from '@material-ui/core';
+import { Container, Input, InputAdornment } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CallIcon from '@material-ui/icons/Call';
 
@@ -14,7 +18,16 @@ class ContactForm extends Component {
   state = {
     name: '',
     number: '',
+    id: '',
   };
+
+  componentDidMount() {
+    const { editedContact } = this.props;
+    if (editedContact) {
+      const { id, name, number } = editedContact;
+      this.setState({ id, name, number });
+    }
+  }
 
   handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -27,9 +40,16 @@ class ContactForm extends Component {
     e.preventDefault();
 
     const { contacts } = this.props;
-    const { name, number } = this.state;
+    const { name, number, id } = this.state;
+
     let newContact;
     this.reset();
+
+    if (id) {
+      this.props.onEdit(this.state);
+      return;
+    }
+
     if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
       return alert(`${name} is already in contacts`);
     } else if (contacts.some(el => el.number === number)) {
@@ -49,6 +69,7 @@ class ContactForm extends Component {
 
   render() {
     const { name, number } = this.state;
+    const { editedContact } = this.props;
 
     return (
       <Container maxWidth="sm">
@@ -90,9 +111,11 @@ class ContactForm extends Component {
                 required
               />
             </label>
-            <Button color="primary" variant="contained" type="submit">
-              Add contact
-            </Button>
+            {editedContact ? (
+              <MyButton title={'Edit'} />
+            ) : (
+              <MyButton title={'Add contact'} />
+            )}
           </div>
         </form>
       </Container>
@@ -104,9 +127,11 @@ const mapStateToProps = state => ({
   contacts: contactsSelectors.contactsArray(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: contact => dispatch(contactsOperations.addContact(contact)),
-});
+const mapDispatchToProps = {
+  onSubmit: contact => contactsOperations.addContact(contact),
+  onEdit: contact => contactsOperations.changeContact(contact),
+  closeModal,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
