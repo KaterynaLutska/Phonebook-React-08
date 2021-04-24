@@ -6,4 +6,8 @@ export {
   changeContact,
   openModal,
   closeModal,
+  fetchContactsError,
+  editContactError,
+  addContactError,
+  deleteContactError,
 } from './phonebook-actions';
