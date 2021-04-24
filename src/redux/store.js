@@ -15,6 +15,8 @@ import {
 
 import phonebookReducer from './phonebook/phonebook-reducer';
 import authReducer from './auth/auth-reducer';
+import error from './error/error';
+import loading from './loading/loading';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -35,6 +37,8 @@ const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     contacts: phonebookReducer,
+    error: error,
+    loading: loading,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
