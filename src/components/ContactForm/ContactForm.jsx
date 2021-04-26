@@ -85,10 +85,14 @@ class ContactForm extends Component {
                 }
                 type="text"
                 name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 value={name}
-                title="The name can only consist of letters, apostrophes, dashes and spaces. For example: Jacob Mercer..."
-                placeholder="name"
+                inputProps={{
+                  pattern:
+                    "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+                  title:
+                    'The name can only consist of letters, apostrophes, dashes and spaces. For example: Jacob Mercer',
+                }}
+                placeholder="Kate White"
                 onChange={this.handleChange}
                 required
               />
@@ -104,9 +108,12 @@ class ContactForm extends Component {
                 type="tel"
                 name="number"
                 value={number}
-                pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-                placeholder="number"
-                title="The phone number must be 11-12 digits long and can contain numbers, spaces, dashes, pot-bellied brackets and can start with +"
+                inputProps={{
+                  pattern: '[+][0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}[0-9]{3}',
+                  title:
+                    'The phone number must be 11-12 digits long and can contain numbers, spaces, dashes, pot-bellied brackets and can start with +',
+                }}
+                placeholder="+380683033145"
                 onChange={this.handleChange}
                 required
               />
